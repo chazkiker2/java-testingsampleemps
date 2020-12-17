@@ -1,4 +1,77 @@
 package com.lambdaschool.filtersampleemps.models;
 
 
-public class UserRoles {}
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Join;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
+
+@Entity
+@Table(name="userroles")
+@IdClass(UserRolesId.class)
+public class UserRoles extends Auditable implements Serializable {
+	@Id
+	@ManyToOne
+	@NotNull
+	@JoinColumn(name="userid")
+	@JsonIgnoreProperties(value="roles", allowSetters = true)
+	private User user;
+
+	@Id
+	@ManyToOne
+	@NotNull
+	@JoinColumn(name="roleid")
+	@JsonIgnoreProperties(value="users", allowSetters = true)
+	private Role role;
+
+	public UserRoles() {}
+
+	public UserRoles(
+			@NotNull User user,
+			@NotNull Role role
+	) {
+		this.user = user;
+		this.role = role;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof UserRoles))
+		{
+			return false;
+		}
+		UserRoles that = (UserRoles) o;
+		return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
+		       ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
+	}
+
+	@Override
+	public int hashCode() {
+		return 23;
+	}
+
+}
