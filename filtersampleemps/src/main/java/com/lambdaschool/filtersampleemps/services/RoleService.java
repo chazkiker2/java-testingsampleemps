@@ -1,4 +1,11 @@
 package com.lambdaschool.filtersampleemps.services;
 
 
-public interface RoleService {}
+import com.lambdaschool.filtersampleemps.models.Role;
+
+
+public interface RoleService {
+
+	Role findByName(String name);
+
+}

@@ -18,7 +18,7 @@ public class JobTitle extends Auditable {
 	@Column
 	private String title;
 
-	@OneToMany(mappedBy="jobnames", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="jobname", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value="jobname", allowSetters = true)
 	private Set<EmployeeTitles> empnames = new HashSet<>();
 

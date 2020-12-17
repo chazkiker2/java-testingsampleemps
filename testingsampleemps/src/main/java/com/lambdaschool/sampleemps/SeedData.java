@@ -1,11 +1,11 @@
 package com.lambdaschool.sampleemps;
 
-import com.github.javafaker.Faker;
 import com.lambdaschool.sampleemps.models.*;
 import com.lambdaschool.sampleemps.repositories.JobTitleRepository;
 import com.lambdaschool.sampleemps.repositories.RoleRepository;
 import com.lambdaschool.sampleemps.repositories.UserRepository;
 import com.lambdaschool.sampleemps.services.EmployeeService;
+import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

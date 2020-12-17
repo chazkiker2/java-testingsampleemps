@@ -19,23 +19,20 @@ import java.util.Set;
 public class Employee
 		extends Auditable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long employeeid;
-
-	@Column(nullable = false,
-	        unique = true)
-	private String name;
-
 	@Transient
 	@JsonIgnore
-	private boolean hasvalueforsalary = false;
-
+	public  boolean hasvalueforsalary = false;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long    employeeid;
+	@Column(nullable = false,
+	        unique = true)
+	private String  name;
 	@DecimalMax(value = "250000.0",
 	            message = "Salary cannot exceed 250,000")
 	@DecimalMin(value = "0.0",
 	            message = "Salary must be a positive number")
-	private double salary;
+	private double  salary;
 
 	@OneToMany(mappedBy = "emp",
 	           cascade = CascadeType.ALL,
@@ -58,8 +55,8 @@ public class Employee
 			            message = "Salary cannot exceed 250,000") @DecimalMin(value = "0.0",
 			                                                                  message = "Salary must be a positive number") double salary
 	) {
-		this.name   = name;
-		this.salary = salary;
+		setName(name);
+		setSalary(salary);
 	}
 
 	public long getEmployeeid() {
@@ -78,20 +75,13 @@ public class Employee
 		this.name = name;
 	}
 
-	public boolean isHasvalueforsalary() {
-		return hasvalueforsalary;
-	}
-
-	public void setHasvalueforsalary(boolean hasvalueforsalary) {
-		this.hasvalueforsalary = hasvalueforsalary;
-	}
-
 	public double getSalary() {
 		return salary;
 	}
 
 	public void setSalary(double salary) {
-		this.salary = salary;
+		this.salary       = salary;
+		hasvalueforsalary = true;
 	}
 
 	public Set<EmployeeTitles> getJobnames() {
